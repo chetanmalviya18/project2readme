@@ -1,7 +1,12 @@
-import inquirer from 'inquirer';
+import inquirer, { QuestionCollection } from 'inquirer';
+import { ReadmeAnswers } from './types/index.js';
 
-export async function promptUser() {
-  const questions = [
+/**
+ * Interactive guided prompts to gather repository metadata.
+ * typed with ReadmeAnswers layout schema.
+ */
+export async function promptUser(): Promise<ReadmeAnswers> {
+  const questions: QuestionCollection<ReadmeAnswers> = [
     {
       type: 'list',
       name: 'template',
@@ -13,7 +18,7 @@ export async function promptUser() {
       type: 'input',
       name: 'title',
       message: 'What is the name of your project? 🏷️',
-      validate: (input) => {
+      validate: (input: string) => {
         if (input.trim() === '') {
           return 'Project name cannot be empty!';
         }
@@ -24,7 +29,7 @@ export async function promptUser() {
       type: 'input',
       name: 'description',
       message: 'Provide a short description of your project: 📝',
-      validate: (input) => {
+      validate: (input: string) => {
         if (input.trim() === '') {
           return 'Description cannot be empty!';
         }
@@ -54,7 +59,7 @@ export async function promptUser() {
       type: 'input',
       name: 'author',
       message: 'Enter the Author name: 👤',
-      validate: (input) => {
+      validate: (input: string) => {
         if (input.trim() === '') {
           return 'Author name cannot be empty!';
         }
@@ -67,8 +72,8 @@ export async function promptUser() {
       name: 'repoUrl',
       message: 'Enter Git repository URL: 🔗',
       default: 'https://github.com/username/project',
-      when: (answers) => answers.template === 'Professional',
-      validate: (input) => {
+      when: (answers: ReadmeAnswers) => answers.template === 'Professional',
+      validate: (input: string) => {
         if (input.trim() === '') {
           return 'Repository URL is required for professional templates!';
         }
@@ -79,39 +84,42 @@ export async function promptUser() {
       type: 'input',
       name: 'longDescription',
       message: 'Enter a detailed, long description (optional): 📄',
-      when: (answers) => answers.template === 'Professional'
+      when: (answers: ReadmeAnswers) => answers.template === 'Professional'
     },
     {
       type: 'input',
       name: 'techStack',
       message: 'Enter technologies used (comma-separated, optional): 💻\n  (e.g. Node.js, Express.js, PostgreSQL)',
-      when: (answers) => answers.template === 'Professional'
+      when: (answers: ReadmeAnswers) => answers.template === 'Professional'
     },
     {
       type: 'input',
       name: 'email',
       message: 'Enter contact email address (optional): 📧',
-      when: (answers) => answers.template === 'Professional'
+      when: (answers: ReadmeAnswers) => answers.template === 'Professional'
     },
     {
       type: 'input',
       name: 'github',
       message: 'Enter GitHub username (optional): 👤',
-      when: (answers) => answers.template === 'Professional'
+      when: (answers: ReadmeAnswers) => answers.template === 'Professional'
     },
     {
       type: 'input',
       name: 'apiDocs',
       message: 'Enter API reference details / markdown tables (optional): 📖',
-      when: (answers) => answers.template === 'Professional'
+      when: (answers: ReadmeAnswers) => answers.template === 'Professional'
     }
   ];
 
   return inquirer.prompt(questions);
 }
 
-export async function promptOverwrite(targetFile) {
-  const { confirmOverwrite } = await inquirer.prompt([
+/**
+ * Confirms file overwrite safety.
+ */
+export async function promptOverwrite(targetFile: string): Promise<boolean> {
+  const { confirmOverwrite } = await inquirer.prompt<{ confirmOverwrite: boolean }>([
     {
       type: "confirm",
       name: "confirmOverwrite",
@@ -122,8 +130,11 @@ export async function promptOverwrite(targetFile) {
   return confirmOverwrite;
 }
 
-export async function promptOpenFile() {
-  const { openFile } = await inquirer.prompt([
+/**
+ * Confirms if the generated README should be opened automatically.
+ */
+export async function promptOpenFile(): Promise<boolean> {
+  const { openFile } = await inquirer.prompt<{ openFile: boolean }>([
     {
       type: "confirm",
       name: "openFile",

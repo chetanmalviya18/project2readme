@@ -1,7 +1,14 @@
 import { logger } from "./logger.js";
+import { GitHubProfile } from "../types/index.js";
 
-export async function fetchGitHubProfile(username) {
-  const result = { avatarUrl: "", fullName: "", bio: "" };
+/**
+ * Fetches public user details from the GitHub API.
+ * 
+ * @param {string} [username] - GitHub username.
+ * @returns {Promise<GitHubProfile>} An object containing avatarUrl, fullName, and bio.
+ */
+export async function fetchGitHubProfile(username?: string): Promise<GitHubProfile> {
+  const result: GitHubProfile = { avatarUrl: "", fullName: "", bio: "" };
 
   if (!username) return result;
 
@@ -12,7 +19,7 @@ export async function fetchGitHubProfile(username) {
     });
 
     if (response.ok) {
-      const data = await response.json();
+      const data: any = await response.json();
       result.avatarUrl = data.avatar_url || "";
       result.fullName = data.name || "";
       result.bio = data.bio || "";

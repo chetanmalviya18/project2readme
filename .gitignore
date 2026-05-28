@@ -14,3 +14,7 @@ pnpm-debug.log*
 # System Files
 .DS_Store
 Thumbs.db
+
+# TypeScript Build Output
+dist/
+*.tsbuildinfo

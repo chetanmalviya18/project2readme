@@ -1,4 +1,11 @@
-export const generateProfessionalReadme = (data) => `
+import { ReadmeTemplateData } from "../types/index.js";
+
+/**
+ * Generates a professional, comprehensive README.md string.
+ * @param {ReadmeTemplateData} data - The compiled template data.
+ * @returns {string} Compiled Markdown string.
+ */
+export const generateProfessionalReadme = (data: ReadmeTemplateData): string => `
 <div align="center">
   <h1>${data.title} 🚀</h1>
   <p>${data.description}</p>${data.badgeUrl ? `
@@ -29,7 +36,7 @@ export const generateProfessionalReadme = (data) => `
 ${data.longDescription || data.description}
 
 ### 💻 Built With
-${data.techStack ? data.techStack.map((tech) => `* ${tech}`).join("\n") : "* JavaScript"}
+${data.techStack && Array.isArray(data.techStack) ? data.techStack.map((tech) => `* ${tech}`).join("\n") : "* JavaScript"}
 
 ---
 

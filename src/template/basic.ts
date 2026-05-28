@@ -1,4 +1,11 @@
-export const generateBasicReadme = (data) => `
+import { ReadmeTemplateData } from "../types/index.js";
+
+/**
+ * Generates a basic README.md string.
+ * @param {ReadmeTemplateData} data - The compiled template data.
+ * @returns {string} Compiled Markdown string.
+ */
+export const generateBasicReadme = (data: ReadmeTemplateData): string => `
 # ${data.title} 📦
 
 ${data.badge ? data.badge + '\n' : ''}${data.description}

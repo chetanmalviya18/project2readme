@@ -1,5 +1,5 @@
 {
-  "name": "readme-cli",
+  "name": "@chetan_malviya/readme-cli",
   "version": "1.0.0",
   "description": "An interactive command-line interface to generate high-quality, professional README.md files.",
   "type": "module",
@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "node bin/index.js",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "prepublishOnly": "node -e \"import('fs').then(fs => fs.copyFileSync('README_NPM.md', 'README.md'))\"",
+    "postpublish": "node -e \"import('fs').then(fs => fs.copyFileSync('README_GITHUB.md', 'README.md'))\""
   },
   "keywords": [
     "cli",

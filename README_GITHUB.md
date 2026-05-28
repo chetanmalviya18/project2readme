@@ -1,74 +1,56 @@
-# README Generator CLI
+# README Generator CLI (GitHub Developer Version)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![NPM Version](https://img.shields.io/badge/npm-v1.3.0-blue.svg)
 ![Node Version](https://img.shields.io/badge/Node.js-%3E%3D_16.0.0-green.svg)
 
-An interactive Command Line Interface (CLI) application built using Node.js to dynamically generate clean, standard, and professional `README.md` files in seconds. 
+An interactive, modular, and enterprise-grade Command Line Interface (CLI) application built using Node.js to dynamically compile clean, standard, and beautiful `README.md` files.
 
-Choose between a simple **Basic** layout or a comprehensive **Professional** layout, answer a few guided terminal questions, and let the CLI handle the formatting!
-
----
-
-## 📖 Features
-
-- **Multi-Template Support**: Choose between a lightweight **Basic** structure and a feature-rich, beautiful **Professional** developer layout.
-- **Dynamic Terminal Prompts**: Automatically triggers conditional questions using `inquirer` depending on your template selection.
-- **Auto-Formatting**: Translates your input into highly readable markdown, formatting raw tech stacks into list items and resolving Git urls automatically.
-- **Shields.io License Badges**: Automatically renders dynamic color badges based on your chosen open-source license.
-- **Overwrite Safety Guard**: Detects if a `README.md` already exists in your folder and interactively prompts you before modifying anything.
+This is the developer-facing repository documentation. For end-user instructions, see the [NPM Package Page](https://www.npmjs.com/package/@chetan_malviya/readme-cli).
 
 ---
 
-## 🛠️ Folder Architecture
+## 📋 Features
 
-The application is structured into decoupled, modular components:
+- **Multi-Template Support**: Choose between a lightweight **Basic** layout or a comprehensive, visually stunning **Professional** layout.
+- **Dynamic Inquirer Prompts**: Leverages conditional questions depending on your selected template style.
+- **GitHub API Integration**: Queries `api.github.com` on-the-fly using the native Node.js global `fetch` API to retrieve your public name, bio, and avatar, embedding them directly into an HTML Portfolio card!
+- **Table of Contents**: Automatically compiles dynamic, clickable Table of Contents anchors for easy navigation.
+- **Interactive File Preview**: Prompts you upon success to instantly launch the newly generated markdown file in your system's default viewer.
+- **Universal Emoji Support**: Embellishes headings and details with matching emojis.
+- **Safe Overwrite Guards**: Checks for existing files and prompts before modifying them.
+
+---
+
+## 🛠️ Decoupled Folder Architecture
+
+The codebase strictly adheres to **Separation of Concerns**, ensuring that all network operations, file checks, prompts, and templates are fully isolated:
 
 ```text
 readme-cli/
 ├── bin/
-│   └── index.js             # Executable shebang command entrypoint
+│   └── index.js             # Shell-executable binary containing the Node.js shebang
 ├── src/
 │   ├── template/
-│   │   ├── basic.js         # Basic template structure
-│   │   └── professional.js  # Professional detailed structure
+│   │   ├── basic.js         # Basic layout template builder
+│   │   └── professional.js  # Professional detailed HTML-card template builder
 │   ├── utils/
-│   │   ├── logger.js        # Reusable ANSI terminal styling loggers
-│   │   └── fileSystem.js    # Reusable file checks and fs promises
-│   ├── index.js             # Entrypoint managing flow lifecycle
-│   ├── prompts.js           # CLI inquirer guided questions modules
-│   └── generator.js         # Generator routing and array parsing engine
-├── package.json             # NPM configuration and dependencies
-└── .gitignore               # Ignored local third-party directories
+│   │   ├── logger.js        # Reusable ANSI console styling loggers
+│   │   ├── fileSystem.js    # Reusable file checks, fs.writeFile, and editor openers
+│   │   └── github.js        # Isolated asynchronous GitHub API user-profile fetches
+│   ├── index.js             # High-level clean workflow manager (orchestrator)
+│   ├── prompts.js           # CLI inquirer interactive questionnaire modules
+│   └── generator.js         # Router and tech stack array parser
+├── package.json             # NPM metadata and publishing swap hooks
+└── .gitignore               # Ignores local node_modules
 ```
-
----
-
-## 🎨 Templates Compared
-
-### 1. Basic Style
-Designed for simple projects, utilities, or scripts. It collects and renders:
-- Project Name (Title)
-- Description
-- Installation Instructions
-- Standard Usage Examples
-- Author Name
-- Chosen License
-
-### 2. Professional Style
-Designed for robust applications, web services, or developer-facing projects. It collects the basic options and dynamically queries additional fields:
-- Git Repository URL
-- Comma-separated **Tech Stack** (auto-formatted into a bulleted array list)
-- Comprehensive **Table of Contents** with embedded collapsible details
-- Collapsible contributions flow
-- Custom **API Reference** markdown block
-- Centralized Author contact cards containing your GitHub profile and email
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-Ensure [Node.js](https://nodejs.org/) (v16.0.0+) is installed.
+Make sure you have [Node.js](https://nodejs.org/) (v16.0.0+) installed.
 
 ### Step 1: Install Dependencies
 ```bash
@@ -76,7 +58,6 @@ npm install
 ```
 
 ### Step 2: Run Locally
-Test the generator immediately:
 ```bash
 # Using npm scripts
 npm start
@@ -85,21 +66,20 @@ npm start
 node src/index.js
 ```
 
+### Step 3: Run Tests
+```bash
+npm test
+```
+
 ---
 
-## 🌟 Installing Globally (System CLI)
+## 🌟 Global Command Linking
 
-Convert the project into a native system terminal utility so you can use it anywhere on your computer:
-
-1. Link your package globally from the project root folder:
-   ```bash
-   npm link
-   ```
-2. Open **any folder or directory** on your computer in your terminal, and run:
-   ```bash
-   readme-cli
-   ```
-3. Your interactive questionnaire will instantly start and write a beautifully formatted `README.md` directly into that folder!
+Link the package globally during development to test CLI integrations natively:
+```bash
+npm link
+```
+Now, you can type `readme-cli` in **any terminal directory** to generate standard readmes on-the-fly!
 
 ---
 

@@ -4,7 +4,11 @@
   "description": "An interactive command-line interface to generate high-quality, professional README.md files.",
   "type": "module",
   "main": "src/index.js",
+  "bin": {
+    "readme-cli": "./bin/index.js"
+  },
   "scripts": {
+    "start": "node bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [

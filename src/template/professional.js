@@ -1,10 +1,10 @@
 export const generateProfessionalReadme = (data) => `
 <div align="center">
   <h1>${data.title}</h1>
-  <p>${data.description}</p>
+  <p>${data.description}</p>${data.badgeUrl ? `
   <p>
-    <img src="https://img.shields.io/badge/License-${data.license}-blue.svg" alt="License">
-  </p>
+    <img src="${data.badgeUrl}" alt="License">
+  </p>` : ''}
 </div>
 
 <details>

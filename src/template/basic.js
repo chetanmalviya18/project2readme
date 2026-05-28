@@ -1,7 +1,7 @@
 export const generateBasicReadme = (data) => `
 # ${data.title}
 
-${data.description}
+${data.badge ? data.badge + '\n' : ''}${data.description}
 
 ## Installation
 

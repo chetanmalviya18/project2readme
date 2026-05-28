@@ -1,4 +1,4 @@
-# README Generator CLI (GitHub Developer Version)
+# project2readme (GitHub Developer Version)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![NPM Version](https://img.shields.io/badge/npm-v2.0.0-blue.svg)
@@ -7,7 +7,7 @@
 
 An interactive, modular, and enterprise-grade Command Line Interface (CLI) application built using Node.js and TypeScript to dynamically compile clean, standard, and beautiful `README.md` files.
 
-This is the developer-facing repository documentation. For end-user instructions, see the [NPM Package Page](https://www.npmjs.com/package/@chetan_malviya/readme-cli).
+This is the developer-facing repository documentation. For end-user instructions, see the [NPM Package Page](https://www.npmjs.com/package/project2readme).
 
 ---
 
@@ -44,10 +44,10 @@ This is the developer-facing repository documentation. For end-user instructions
 The codebase strictly adheres to **Separation of Concerns**, ensuring that all network operations, file checks, prompts, and templates are fully isolated and strongly typed:
 
 ```text
-readme-cli/
+project2readme/
 ├── bin/
 │   └── index.js             # Shell-executable binary (imports compiled dist/index.js)
-├── dist/                    # [NEW] Emitted JavaScript ESM files & typings (.d.ts)
+├── dist/                    # Emitted JavaScript ESM files & typings (.d.ts)
 ├── src/
 │   ├── types/
 │   │   └── index.ts         # [TS] Unified custom interfaces and structural types
@@ -61,7 +61,7 @@ readme-cli/
 │   ├── index.ts             # [TS] High-level clean workflow manager (orchestrator)
 │   ├── prompts.ts           # [TS] CLI inquirer interactive questionnaire modules
 │   └── generator.ts         # [TS] Router and tech stack array parser
-├── tsconfig.json            # [NEW] TypeScript compiler configurations
+├── tsconfig.json            # TypeScript compiler configurations
 ├── package.json             # NPM metadata and publishing swap hooks
 └── .gitignore               # Ignores local node_modules/ and dist/ build files
 ```
@@ -112,7 +112,7 @@ Link the package globally during development to test CLI integrations natively:
 ```bash
 npm link
 ```
-Now, you can type `readme-cli` in **any terminal directory** on your computer to generate standard readmes on-the-fly!
+Now, you can type `project2readme` in **any terminal directory** on your computer to generate standard readmes on-the-fly!
 
 ---
 

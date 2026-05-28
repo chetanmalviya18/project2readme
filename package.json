@@ -1,11 +1,11 @@
 {
-  "name": "@chetan_malviya/readme-cli",
-  "version": "2.0.0",
+  "name": "project2readme",
+  "version": "2.0.1",
   "description": "An interactive command-line interface to generate high-quality, professional README.md files.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "readme-cli": "./bin/index.js"
+    "project2readme": "./bin/index.js"
   },
   "scripts": {
     "start": "npx tsx src/index.ts",

@@ -1,4 +1,4 @@
-# @chetan_malviya/readme-cli
+# project2readme
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![NPM Version](https://img.shields.io/badge/npm-v2.0.0-blue.svg)
@@ -27,13 +27,13 @@ Say goodbye to typing markdown boilerplate manually! Simply select a style, answ
 You can install this CLI globally on your system using NPM:
 
 ```bash
-npm install -g @chetan_malviya/readme-cli
+npm install -g project2readme
 ```
 
 Or run it instantly without global installation using `npx`:
 
 ```bash
-npx @chetan_malviya/readme-cli
+npx project2readme
 ```
 
 ---
@@ -43,7 +43,7 @@ npx @chetan_malviya/readme-cli
 Once executed, navigate to the root folder of any project in your terminal and run the command:
 
 ```bash
-readme-cli
+project2readme
 ```
 
 The CLI will guide you through:

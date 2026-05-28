@@ -85,4 +85,4 @@ Now, you can type `readme-cli` in **any terminal directory** to generate standar
 
 ## ⚖️ License
 
-Distributed under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

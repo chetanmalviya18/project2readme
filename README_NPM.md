@@ -61,4 +61,4 @@ A robust, feature-rich developer-facing layout. It automatically generates:
 
 ## ⚖️ License
 
-Distributed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

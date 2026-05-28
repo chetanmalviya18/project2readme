@@ -121,3 +121,15 @@ export async function promptOverwrite(targetFile) {
   ]);
   return confirmOverwrite;
 }
+
+export async function promptOpenFile() {
+  const { openFile } = await inquirer.prompt([
+    {
+      type: "confirm",
+      name: "openFile",
+      message: "Would you like to open the generated README.md file in your default editor?",
+      default: true,
+    },
+  ]);
+  return openFile;
+}

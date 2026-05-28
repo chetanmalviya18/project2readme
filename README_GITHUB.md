@@ -1,7 +1,7 @@
 # README Generator CLI (GitHub Developer Version)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![NPM Version](https://img.shields.io/badge/npm-v1.3.1-blue.svg)
+![NPM Version](https://img.shields.io/badge/npm-v2.0.0-blue.svg)
 ![Node Version](https://img.shields.io/badge/Node.js-%3E%3D_16.0.0-green.svg)
 ![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue.svg)
 

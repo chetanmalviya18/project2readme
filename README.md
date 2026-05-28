@@ -3,91 +3,106 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Node Version](https://img.shields.io/badge/Node.js-%3E%3D_16.0.0-green.svg)
 
-An interactive, user-friendly Command Line Interface (CLI) application designed to dynamically generate high-quality, professional `README.md` files for your repositories. 
+An interactive Command Line Interface (CLI) application built using Node.js to dynamically generate clean, standard, and professional `README.md` files in seconds. 
 
-Say goodbye to writing boilerplate markdown from scratch. With this tool, you can construct a clean, standard, and beautiful README in seconds by answering a few simple terminal prompts!
-
----
-
-## 📖 What It Is & What It's For
-
-When building software projects, a clear and well-structured README is vital for explaining how your application works, how it's installed, and who built it. However, setting up these files manually can be repetitive and time-consuming.
-
-This project is a **developer productivity utility** that:
-- Prompts you for critical project metadata (Project Name, Description, Installation instructions, Usage guidelines, Licensing, and Author profiles).
-- Formats your input into an elegant Markdown template featuring automatic dynamic **Shields.io License Badges**, pre-set syntax-highlighted code blocks, and standard Table of Contents anchors.
-- Includes a built-in safety guard to check if a `README.md` already exists in your folder and interactively prompts you before overwriting it.
+Choose between a simple **Basic** layout or a comprehensive **Professional** layout, answer a few guided terminal questions, and let the CLI handle the formatting!
 
 ---
 
-## 🛠️ How It Was Built (Architecture)
+## 📖 Features
 
-This application was constructed from the ground up using **Node.js** with modern **ES Modules (`type: "module"`)** and is designed with clean, decoupled, and reusable architectural patterns:
+- **Multi-Template Support**: Choose between a lightweight **Basic** structure and a feature-rich, beautiful **Professional** developer layout.
+- **Dynamic Terminal Prompts**: Automatically triggers conditional questions using `inquirer` depending on your template selection.
+- **Auto-Formatting**: Translates your input into highly readable markdown, formatting raw tech stacks into list items and resolving Git urls automatically.
+- **Shields.io License Badges**: Automatically renders dynamic color badges based on your chosen open-source license.
+- **Overwrite Safety Guard**: Detects if a `README.md` already exists in your folder and interactively prompts you before modifying anything.
+
+---
+
+## 🛠️ Folder Architecture
+
+The application is structured into decoupled, modular components:
 
 ```text
 readme-cli/
 ├── bin/
-│   └── index.js             # Shell-executable binary wrapper containing the Node.js shebang
+│   └── index.js             # Executable shebang command entrypoint
 ├── src/
+│   ├── template/
+│   │   ├── basic.js         # Basic template structure
+│   │   └── professional.js  # Professional detailed structure
 │   ├── utils/
-│   │   ├── logger.js        # Lightweight, zero-dependency ANSI console styling engine
-│   │   └── fileSystem.js    # Reusable fs/promises path and file-saving helpers
-│   ├── index.js             # Main orchestrator managing application lifecycle and safety checks
-│   ├── prompts.js           # CLI inquirer terminal questionnaire configurations
-│   └── generator.js         # Dedicated Markdown text-compilation template literal engine
-├── package.json             # NPM project configurations and package bindings
-└── .gitignore               # Ignores third-party dependencies (node_modules/)
+│   │   ├── logger.js        # Reusable ANSI terminal styling loggers
+│   │   └── fileSystem.js    # Reusable file checks and fs promises
+│   ├── index.js             # Entrypoint managing flow lifecycle
+│   ├── prompts.js           # CLI inquirer guided questions modules
+│   └── generator.js         # Generator routing and array parsing engine
+├── package.json             # NPM configuration and dependencies
+└── .gitignore               # Ignored local third-party directories
 ```
 
-### Key Technical Features:
-1. **Interactive Questions (`src/prompts.js`)**: Leverages the industry-standard `inquirer` library to support terminal validations (preventing empty inputs), scrollable lists, and default prompt answers.
-2. **Modular Utilities (`src/utils/`)**: Separates low-level operations (like saving files and printing colored logs) from the core workflow orchestration.
-3. **Decoupled Orchestrator (`src/index.js`)**: Coordinates the prompt data-flow and generator inputs using clean ES import/export modules.
-4. **Shell Executable Integration (`bin/index.js`)**: Employs the `#!/usr/bin/env node` shebang, allowing standard terminal shells to run it as a standalone native program.
+---
+
+## 🎨 Templates Compared
+
+### 1. Basic Style
+Designed for simple projects, utilities, or scripts. It collects and renders:
+- Project Name (Title)
+- Description
+- Installation Instructions
+- Standard Usage Examples
+- Author Name
+- Chosen License
+
+### 2. Professional Style
+Designed for robust applications, web services, or developer-facing projects. It collects the basic options and dynamically queries additional fields:
+- Git Repository URL
+- Comma-separated **Tech Stack** (auto-formatted into a bulleted array list)
+- Comprehensive **Table of Contents** with embedded collapsible details
+- Collapsible contributions flow
+- Custom **API Reference** markdown block
+- Centralized Author contact cards containing your GitHub profile and email
 
 ---
 
 ## 🚀 Getting Started
 
-Follow these steps to run, play with, or install this tool globally on your system.
-
 ### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) installed (v16.0.0 or higher recommended).
+Ensure [Node.js](https://nodejs.org/) (v16.0.0+) is installed.
 
 ### Step 1: Install Dependencies
-Open your terminal in the project directory and run:
 ```bash
 npm install
 ```
 
 ### Step 2: Run Locally
-You can test the program immediately using either of these commands:
+Test the generator immediately:
 ```bash
-# Using NPM scripts
+# Using npm scripts
 npm start
 
-# Executing the index file directly
+# Or directly executing node
 node src/index.js
 ```
 
 ---
 
-## 🌟 Installing Globally (Command Line Integration)
+## 🌟 Installing Globally (System CLI)
 
-You can turn this project into a native global terminal utility! This lets you run it in **any folder** on your computer.
+Convert the project into a native system terminal utility so you can use it anywhere on your computer:
 
-1. In your terminal inside the project directory, link your package globally:
+1. Link your package globally from the project root folder:
    ```bash
    npm link
    ```
-2. Now, open any folder or project on your computer in your terminal, and simply type:
+2. Open **any folder or directory** on your computer in your terminal, and run:
    ```bash
    readme-cli
    ```
-3. The generator will instantly boot up, ask you for project details, and save a beautiful `README.md` to that folder!
+3. Your interactive questionnaire will instantly start and write a beautifully formatted `README.md` directly into that folder!
 
 ---
 
 ## ⚖️ License
 
-This project is licensed under the [MIT License](LICENSE).
+Distributed under the [MIT License](LICENSE).

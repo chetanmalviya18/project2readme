@@ -1,67 +1,21 @@
-export function getLicenseBadge(license) {
-  if (license === 'None') return '';
-
-  const formattedLicense = license.replace(' ', '%20').replace('-', '--');
-  return `![License: ${license}](https://img.shields.io/badge/License-${formattedLicense}-blue.svg)`;
-}
-
-function getLicenseSection(license) {
-  if (license === 'None') {
-    return 'This project is unlicensed and free to use without restrictions.';
-  }
-  return `This project is licensed under the **${license}** license.`;
-}
+import { generateBasicReadme } from "./template/basic.js";
+import { generateProfessionalReadme } from "./template/professional.js";
 
 export function generateReadme(answers) {
-  const badge = getLicenseBadge(answers.license);
-  const licenseText = getLicenseSection(answers.license);
+  if (answers.template === "Basic") {
+    return generateBasicReadme(answers);
+  }
 
-  return `# ${answers.title}
+  if (answers.template === "Professional") {
+    if (answers.techStack && typeof answers.techStack === "string") {
+      answers.techStack = answers.techStack
+        .split(",")
+        .map((tech) => tech.trim())
+        .filter((tech) => tech !== "");
+    }
 
-${badge ? badge + '\n' : ''}
-## Description
+    return generateProfessionalReadme(answers);
+  }
 
-${answers.description}
-
----
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [License](#license)
-- [Author](#author)
-
----
-
-## Installation
-
-To install dependencies, run:
-
-\`\`\`bash
-${answers.installation}
-\`\`\`
-
----
-
-## Usage
-
-To use this application, run:
-
-\`\`\`bash
-${answers.usage}
-\`\`\`
-
----
-
-## License
-
-${licenseText}
-
----
-
-## Author
-
-- **GitHub:** [${answers.github}](https://github.com/${answers.github})
-`;
+  throw new Error(`Unknown template type: ${answers.template}`);
 }

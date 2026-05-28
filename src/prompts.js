@@ -3,6 +3,13 @@ import inquirer from 'inquirer';
 export async function promptUser() {
   const questions = [
     {
+      type: 'list',
+      name: 'template',
+      message: 'Choose a README template style: 🎨',
+      choices: ['Basic', 'Professional'],
+      default: 'Basic'
+    },
+    {
       type: 'input',
       name: 'title',
       message: 'What is the name of your project? 🏷️',
@@ -16,7 +23,7 @@ export async function promptUser() {
     {
       type: 'input',
       name: 'description',
-      message: 'Provide a description of your project: 📝',
+      message: 'Provide a short description of your project: 📝',
       validate: (input) => {
         if (input.trim() === '') {
           return 'Description cannot be empty!';
@@ -45,14 +52,58 @@ export async function promptUser() {
     },
     {
       type: 'input',
-      name: 'github',
-      message: 'Enter your GitHub username: 👤',
+      name: 'author',
+      message: 'Enter the Author name: 👤',
       validate: (input) => {
         if (input.trim() === '') {
-          return 'GitHub username cannot be empty!';
+          return 'Author name cannot be empty!';
         }
         return true;
       }
+    },
+    // --- PROFESSIONAL EXTRAS (Asked conditionally using "when") ---
+    {
+      type: 'input',
+      name: 'repoUrl',
+      message: 'Enter Git repository URL: 🔗',
+      default: 'https://github.com/username/project',
+      when: (answers) => answers.template === 'Professional',
+      validate: (input) => {
+        if (input.trim() === '') {
+          return 'Repository URL is required for professional templates!';
+        }
+        return true;
+      }
+    },
+    {
+      type: 'input',
+      name: 'longDescription',
+      message: 'Enter a detailed, long description (optional): 📄',
+      when: (answers) => answers.template === 'Professional'
+    },
+    {
+      type: 'input',
+      name: 'techStack',
+      message: 'Enter technologies used (comma-separated, optional): 💻\n  (e.g. Node.js, Express.js, PostgreSQL)',
+      when: (answers) => answers.template === 'Professional'
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Enter contact email address (optional): 📧',
+      when: (answers) => answers.template === 'Professional'
+    },
+    {
+      type: 'input',
+      name: 'github',
+      message: 'Enter GitHub username (optional): 👤',
+      when: (answers) => answers.template === 'Professional'
+    },
+    {
+      type: 'input',
+      name: 'apiDocs',
+      message: 'Enter API reference details / markdown tables (optional): 📖',
+      when: (answers) => answers.template === 'Professional'
     }
   ];
 

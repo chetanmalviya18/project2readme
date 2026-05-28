@@ -58,3 +58,15 @@ export async function promptUser() {
 
   return inquirer.prompt(questions);
 }
+
+export async function promptOverwrite(targetFile) {
+  const { confirmOverwrite } = await inquirer.prompt([
+    {
+      type: "confirm",
+      name: "confirmOverwrite",
+      message: `${targetFile} already exists in this folder. Do you want to overwrite it?`,
+      default: false,
+    },
+  ]);
+  return confirmOverwrite;
+}

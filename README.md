@@ -45,4 +45,4 @@ This project is licensed under the **MIT** license.
 
 ## Author
 
-- **GitHub:** [@chetanmalviya18](https://github.com/chetanmalviya18)
+- **GitHub:** [chetanmalviya18](https://github.com/chetanmalviya18)

@@ -1,24 +1,41 @@
 import { generateReadme } from "./generator.js";
-import { promptUser } from "./prompts.js";
-import fs from "fs/promises";
-import path from "path";
+import { promptUser, promptOverwrite } from "./prompts.js";
+import { logger } from "./utils/logger.js";
+import { saveMarkdownFile, fileExists } from "./utils/fileSystem.js";
 
 async function run() {
-  console.log("--- README Generator CLI ---");
+  logger.banner("README Generator CLI");
+
   try {
+    const targetFile = "README.md";
+    const exists = await fileExists(targetFile);
+
+    if (exists) {
+      const confirmOverwrite = await promptOverwrite(targetFile);
+
+      if (!confirmOverwrite) {
+        logger.warn(
+          "Operation cancelled. Your existing file remains untouched.",
+        );
+        return;
+      }
+      console.log();
+    }
+
+    logger.info(
+      "Please answer the following questions to construct your README:\n",
+    );
     const answers = await promptUser();
 
+    logger.info("\nCompiling your README template...");
     const readmeContent = generateReadme(answers);
 
-    const outputPath = path.resolve(process.cwd(), "README.md");
+    logger.info("Writing files...");
+    const savedPath = await saveMarkdownFile(targetFile, readmeContent);
 
-    console.log("\nGenerating your README.md...");
-
-    await fs.writeFile(outputPath, readmeContent, "utf8");
-
-    console.log("✔ Successfully generated! Saved to:", outputPath);
+    logger.success(`Successfully generated! Saved to: ${savedPath}`);
   } catch (error) {
-    console.error("\n✖ An error occurred:", error.message);
+    logger.error(error.message);
   }
 }
 

@@ -1,18 +1,16 @@
 {
   "name": "project2readme",
-  "version": "2.0.1",
+  "version": "1.0.0",
   "description": "An interactive command-line interface to generate high-quality, professional README.md files.",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/bin/index.js",
   "bin": {
     "project2readme": "./bin/index.js"
   },
   "scripts": {
-    "start": "npx tsx src/index.ts",
+    "start": "npx tsx src/bin/index.ts",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "prepublishOnly": "npm run build && node -e \"import('fs').then(fs => fs.copyFileSync('README_NPM.md', 'README.md'))\"",
-    "postpublish": "node -e \"import('fs').then(fs => fs.copyFileSync('README_GITHUB.md', 'README.md'))\""
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "cli",
@@ -24,7 +22,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "inquirer": "^9.2.19"
+    "@google/genai": "^2.7.0",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3",
+    "dotenv": "^17.4.2",
+    "inquirer": "^9.3.8",
+    "ora": "^9.4.0"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.9",

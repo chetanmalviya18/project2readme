@@ -9,4 +9,4 @@
  */
 
 // Import the main CLI orchestrator
-import '../dist/index.js';
+import '../dist/bin/index.js';

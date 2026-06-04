@@ -1,69 +1,73 @@
-# project2readme (GitHub Developer Version)
+# project2readme 🚀
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![NPM Version](https://img.shields.io/badge/npm-v2.0.0-blue.svg)
-![Node Version](https://img.shields.io/badge/Node.js-%3E%3D_16.0.0-green.svg)
+![NPM Version](https://img.shields.io/badge/npm-v2.0.1-blue.svg)
+![Node Version](https://img.shields.io/badge/Node.js-%3E%3D_18.0.0-green.svg)
 ![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue.svg)
 
-An interactive, modular, and enterprise-grade Command Line Interface (CLI) application built using Node.js and TypeScript to dynamically compile clean, standard, and beautiful `README.md` files.
-
-This is the developer-facing repository documentation. For end-user instructions, see the [NPM Package Page](https://www.npmjs.com/package/project2readme).
+An interactive, production-grade, and **AI-powered Command Line Interface (CLI)** built with Node.js and TypeScript. It utilizes the official Google Gemini SDK (`@google/genai`) to dynamically optimize and compile clean, structured, and beautiful `README.md` files.
 
 ---
 
 ## 📋 Table of Contents
 - [📖 Features](#-features)
-- [🛠️ TypeScript Folder Architecture](#%EF%B8%8F-typescript-folder-architecture)
+- [🛠️ Scalable AI-Powered Architecture](#%EF%B8%8F-scalable-ai-powered-architecture)
 - [🚀 Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
-  - [Step 1: Install Dependencies](#step-1-install-dependencies)
-  - [Step 2: Run in Development](#step-2-run-in-development)
+  - [Installation](#installation)
+  - [Running the CLI](#running-the-cli)
+  - [Setting up Gemini AI](#setting-up-gemini-ai)
+- [⚙️ CLI Flags & Options](#%EF%B8%8F-cli-flags--options)
 - [🔧 TypeScript & Build Pipeline](#-typescript--build-pipeline)
-  - [Compiler Configuration](#compiler-configuration)
-  - [Build Script](#build-script)
-- [🌟 Global Command Linking](#-global-command-linking)
+  - [Clean Rebuild](#clean-rebuild)
+- [🌟 Global Linking](#-global-linking)
 - [⚖️ License](#%EF%B8%8F-license)
 
 ---
 
 ## 📖 Features
 
-- **Multi-Template Support**: Choose between a lightweight **Basic** layout or a comprehensive, visually stunning **Professional** layout.
-- **Dynamic Inquirer Prompts**: Leverages conditional questions using `inquirer` depending on your selected template style.
-- **GitHub API Integration**: Queries `api.github.com` on-the-fly using the native Node.js global `fetch` API to retrieve your public name, bio, and avatar, embedding them directly into an HTML Portfolio card!
-- **Table of Contents**: Automatically compiles dynamic, clickable Table of Contents anchors for easy navigation.
-- **Interactive File Preview**: Prompts you upon success to instantly launch the newly generated markdown file in your system's default viewer.
-- **Universal Emoji Support**: Embellishes headings and details with matching emojis.
-- **Safe Overwrite Guards**: Checks for existing files and prompts before modifying them.
-- **Strongly Typed**: 100% written in TypeScript with isolated interfaces and strict compiler safety.
+- **🧠 Google Gemini 2.5 Flash Integration**: Powered by the brand-new `@google/genai` client, it intelligently generates polished descriptions, step-by-step installation guides, advanced usage instructions, and comprehensive markdown API docs in JSON format.
+- **🎨 Multi-Template Support**: Choose between a lightweight **Basic** layout or a comprehensive, visually stunning **Professional** layout.
+- **🛠️ Commander Subcommands & Flags**: Easily configure options directly from your terminal shell to bypass or override interactive questionnaire defaults.
+- **🌐 GitHub API Profile Retrieval**: Automatically queries public GitHub profiles using Node's native `fetch` to retrieve avatars, names, and bios, formatting them into an HTML profile card.
+- **💡 Safe Overwrite Guards**: Gracefully checks for existing `README.md` files and prompts before modifying or overwriting your work.
+- **📋 Table of Contents**: Automatically compiles dynamic, clickable Table of Contents anchors for effortless navigation.
+- **⚡ Interactive Live Preview**: Prompts upon success to automatically open the generated markdown file in your system's default viewer.
+- **🔒 Strongly Typed & ESM Native**: Fully typed codebase utilizing Node's modern ES Modules (`type: "module"`) and `NodeNext` module resolution.
 
 ---
 
-## 🛠️ TypeScript Folder Architecture
+## 🛠️ Scalable AI-Powered Architecture
 
-The codebase strictly adheres to **Separation of Concerns**, ensuring that all network operations, file checks, prompts, and templates are fully isolated and strongly typed:
+The codebase strictly adheres to **Separation of Concerns**, ensuring that CLI orchestration, templates, network services, prompts, and filesystem operations are fully modularized:
 
 ```text
 project2readme/
 ├── bin/
-│   └── index.js             # Shell-executable binary (imports compiled dist/index.js)
-├── dist/                    # Emitted JavaScript ESM files & typings (.d.ts)
+│   └── index.js             # Shell-executable binary (imports compiled dist/bin/index.js)
+├── dist/                    # Clean compiled JavaScript ESM outputs and typings (.d.ts)
 ├── src/
-│   ├── types/
-│   │   └── index.ts         # [TS] Unified custom interfaces and structural types
-│   ├── template/
-│   │   ├── basic.ts         # [TS] Basic layout template builder
-│   │   └── professional.ts  # [TS] Professional detailed HTML-card template builder
-│   ├── utils/
-│   │   ├── logger.ts        # [TS] Reusable ANSI console styling loggers
-│   │   ├── fileSystem.ts    # [TS] Reusable file checks, fs.writeFile, and editor openers
-│   │   └── github.ts        # [TS] Isolated asynchronous GitHub API user-profile fetches
-│   ├── index.ts             # [TS] High-level clean workflow manager (orchestrator)
-│   ├── prompts.ts           # [TS] CLI inquirer interactive questionnaire modules
-│   └── generator.ts         # [TS] Router and tech stack array parser
-├── tsconfig.json            # TypeScript compiler configurations
-├── package.json             # NPM metadata and publishing swap hooks
-└── .gitignore               # Ignores local node_modules/ and dist/ build files
+│   ├── bin/                 # CLI entrypoint and orchestrator bootstrapper
+│   │   └── index.ts         # Initializer for Commander.js, parses options/arguments
+│   ├── commands/            # CLI Command handlers
+│   │   └── generate.ts      # Orchestrates questionnaire flow, services, and file creation
+│   ├── services/            # Decoupled Network API communication clients
+│   │   ├── ai.ts            # Official Google Gen AI SDK connector (Gemini 2.5 Flash)
+│   │   └── github.ts        # Pure fetch integration with GitHub API
+│   ├── prompts/             # Inquirer interactive questions
+│   │   └── questions.ts     # Inquirer schemas, validations, and overwriting prompts
+│   ├── templates/           # Reusable functional Markdown layout compilers
+│   │   ├── basic.ts         # Lightweight README template
+│   │   └── professional.ts  # HTML-enhanced professional README template
+│   ├── types/               # TypeScript strong type layer
+│   │   └── index.ts         # Central types, CLI interfaces, and payload shapes
+│   └── utils/               # Operating System interfaces
+│       ├── fileSystem.ts    # Safe file checks, writeFile, and native file editor launchers
+│       └── ui.ts            # Chalk CLI coloring and Ora loading spinner abstractions
+├── tsconfig.json            # Strict TypeScript compiler configurations
+├── package.json             # NPM package scripts and dependencies
+└── .gitignore               # Ignores local node_modules/ and dist/ build folders
 ```
 
 ---
@@ -71,51 +75,87 @@ project2readme/
 ## 🚀 Getting Started
 
 ### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) (v16.0.0+) installed.
+Make sure you have [Node.js](https://nodejs.org/) (v18.0.0+) installed on your machine.
 
-### Step 1: Install Dependencies
+### Installation
+Clone the repository locally and install the required production-grade dependencies:
 ```bash
 npm install
 ```
 
-### Step 2: Run in Development
-You can run the TypeScript source code directly in memory during development (without having to compile first) using the pre-configured `tsx` runner:
+### Running the CLI
+To run the CLI during development directly using `tsx` (TypeScript Execute without compilation):
 ```bash
 npm start
 ```
-*(Runs `npx tsx src/index.ts` under the hood)*
+*(Runs `npx tsx src/bin/index.ts` under the hood)*
+
+### Setting up Gemini AI
+To leverage the AI-powered expansion features, obtain a Gemini API Key from Google AI Studio and configure it as an environment variable in your terminal session:
+
+**On Windows (PowerShell):**
+```powershell
+$env:GEMINI_API_KEY="your_api_key_here"
+```
+
+**On Linux / macOS (bash/zsh):**
+```bash
+export GEMINI_API_KEY="your_api_key_here"
+```
+
+Run the generator with the `--ai` flag to trigger professional AI writing optimizations:
+```bash
+npm start -- --ai
+```
+
+---
+
+## ⚙️ CLI Flags & Options
+
+You can customize the generation behavior using CLI options. These flags can prefill values or override interactive defaults:
+
+| Short Flag | Long Flag | Description | Expected Value |
+| :--- | :--- | :--- | :--- |
+| `-a` | `--ai` | Triggers Google Gemini to expand and optimize the README | None (Boolean) |
+| `-t` | `--template` | Pre-fills the README style choice | `Basic` \| `Professional` |
+| `-l` | `--license` | Pre-fills the licensing style choice | `MIT` \| `Apache 2.0` \| `GPL 3.0` \| `BSD 3-Clause` \| `None` |
+| `-g` | `--github` | Pre-fills the target GitHub profile query username | Username (e.g. `octocat`) |
+| `-k` | `--key` | Direct custom Gemini API key string | Key string (e.g. `AIzaSy...`) |
+
+### Example Usage:
+```bash
+# Generate a Professional template using Gemini AI by passing the API key directly via flag
+npm start -- --ai --template Professional --github octocat --key AIzaSyYourActualAPIKeyHere
+```
 
 ---
 
 ## 🔧 TypeScript & Build Pipeline
 
-### Compiler Configuration
-The project uses the standard **`tsconfig.json`** compiler configurations:
-- **Target**: `ES2022` for modern JavaScript syntax.
-- **Module Resolution**: `NodeNext` to support native Node.js ES Modules.
-- **Strict Mode**: Enabled for full type-safety.
-- **Declaration Files**: Generates `.d.ts` declaration files automatically upon build.
+### Clean Rebuild
+Before publishing to NPM, TypeScript compiles the code to standard ECMAScript modules within the `dist/` directory.
 
-### Build Script
-Before publishing to NPM, the code is compiled into standard JavaScript ES Module outputs in the `dist/` directory.
-
-To trigger the compilation manually:
+To clean previous compiler states and perform a clean rebuild:
 ```bash
+# Cleans and recompiles
 npm run build
 ```
 
 ---
 
-## 🌟 Global Command Linking
+## 🌟 Global Linking
 
-Link the package globally during development to test CLI integrations natively:
+You can link the project globally to test integration in other workspace directories:
 ```bash
 npm link
 ```
-Now, you can type `project2readme` in **any terminal directory** on your computer to generate standard readmes on-the-fly!
+Once linked, run the CLI globally from **any directory**:
+```bash
+project2readme --ai
+```
 
 ---
 
 ## ⚖️ License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Distributed under the **MIT** License. See the [LICENSE](LICENSE) file for more information.

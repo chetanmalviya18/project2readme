@@ -1,14 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
 import { exec } from "child_process";
-import { logger } from "./logger.js";
+import { ui } from "./ui.js";
 
-/**
- * Checks if a file exists at the given path.
- *
- * @param {string} filePath - Absolute or relative path to check.
- * @returns {Promise<boolean>} True if the file exists, false otherwise.
- */
+// Checks if a file exists at the given path.
 export async function fileExists(filePath: string): Promise<boolean> {
   try {
     await fs.access(filePath);
@@ -26,21 +21,24 @@ export async function fileExists(filePath: string): Promise<boolean> {
  * @param {string} content - String contents to write.
  * @returns {Promise<string>} The resolved absolute output path on success.
  */
-export async function saveMarkdownFile(fileName: string, content: string): Promise<string> {
+export async function saveMarkdownFile(
+  fileName: string,
+  content: string,
+): Promise<string> {
   const outputPath = path.resolve(process.cwd(), fileName);
 
   try {
     await fs.writeFile(outputPath, content, "utf8");
     return outputPath;
   } catch (error: any) {
-    logger.error(`Failed to write file to ${outputPath}: ${error.message}`);
+    ui.error(`Failed to write file to ${outputPath}: ${error.message}`);
     throw error;
   }
 }
 
 /**
  * Automatically launches the file in the default OS markdown editor or browser.
- * 
+ *
  * @param {string} fileName - File name to open.
  */
 export async function openFileInEditor(fileName: string): Promise<void> {
@@ -52,8 +50,8 @@ export async function openFileInEditor(fileName: string): Promise<void> {
         : "xdg-open";
   try {
     exec(`${openCommand} ${fileName}`);
-    logger.success(`Opening ${fileName}...`);
+    ui.success(`Opening ${fileName}...`);
   } catch (error: any) {
-    logger.error(`Could not open ${fileName}: ${error.message}`);
+    ui.error(`Could not open ${fileName}: ${error.message}`);
   }
 }

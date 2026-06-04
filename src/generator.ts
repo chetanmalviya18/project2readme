@@ -1,5 +1,5 @@
-import { generateBasicReadme } from "./template/basic.js";
-import { generateProfessionalReadme } from "./template/professional.js";
+import { generateBasicReadme } from "./templates/basic.js";
+import { generateProfessionalReadme } from "./templates/professional.js";
 import { ReadmeTemplateData, LicenseType } from "./types/index.js";
 
 /**

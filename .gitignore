@@ -18,3 +18,5 @@ Thumbs.db
 # TypeScript Build Output
 dist/
 *.tsbuildinfo
+
+.env

@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/bin/index.js",
   "bin": {
-    "project2readme": "./bin/index.js"
+    "project2readme": "bin/index.js"
   },
   "scripts": {
     "start": "npx tsx src/bin/index.ts",
